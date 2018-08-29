@@ -1,13 +1,17 @@
+"""
+Cody Hart
+Pick Up Sticks
+CSC 540
+"""
+
 import random
-num_games = 2
-num_sticks = 10
-random.seed(1)
+num_games = 1000
+num_sticks = random.randint(10,100)
 AI = []
-def create_AI_bin(num_sticks):
-    starting_choices = [1,2,3]
+def create_AI_bin(num_sticks):   
     AI.append([])
     for i in range(num_sticks + 1):
-        AI.append(starting_choices)
+        AI.append([1,2,3])
 
 def play_game(num_sticks):
     AI_turn = True
@@ -46,7 +50,6 @@ def play_game(num_sticks):
                 choice = random.randint(1,3)
                 sticks_left_in_game = sticks_left_in_game - choice
             AI_turn = True
-    print(game_choices)
     if(AI_turn):
         return []
     else:
@@ -66,24 +69,19 @@ def print_results():
             elif(AI[i][j] == 3):
                 three = three + 1
         if(one > two and one > three):
-            print(i,': 1')
+            print("For",i,'sticks the best move is: 1')
         elif(two > one and two > three):
-            print(i,': 2')
+            print("For",i,'sticks the best move is: 2')
         elif(three > one and three > two):
-            print(i,': 3')
-        else:
-            print("no optimal move")
-    #print(one,two,three)                 
+            print("For",i,'sticks the best move is: 3')
+            
 #play the game num_games number of times to teach the AI
 print("Training AI")
-for i in range(num_games):  
+for i in range(num_games+1):  
     results = play_game(num_sticks)
-    #Sprint(results)
-    for j in range(len(results)):
+    for j in range(len(results)-1):       
         if(results[j] > 0):
-            AI[i].append(results[j])
-            
-    #print(AI)                
+            AI[j].append(results[j])                   
 print_results()
     
 
